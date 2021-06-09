@@ -10,6 +10,7 @@
     "@types/node": "^15.12.1",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.6",
+    "lint-staged": "^11.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -20,7 +21,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "eslint": "npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "eslint:fix": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix --max-warnings 0",
+    "postinstall": "npm run husky:install",
+    "husky:pre-commit": "npm run lint-staged",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,less}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,tsx}": "eslint --fix --max-warnings 0"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +63,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "2.3.1"
+    "prettier": "2.3.1",
+    "husky": "^6.0.0"
   }
 }
